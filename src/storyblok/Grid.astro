@@ -4,11 +4,8 @@ import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 interface SbBlokData {
   _uid: string
-  [key: string]: any
-}
-
-interface GridProps {
   columns?: SbBlokData[]
+  [key: string]: any
 }
 
 const { blok }: { blok: SbBlokData } = Astro.props
@@ -16,7 +13,7 @@ const { blok }: { blok: SbBlokData } = Astro.props
 
 <div {...storyblokEditable(blok)}>
   {
-    blok.columns?.map((blok) => (
+    blok.columns?.map((blok: SbBlokData) => (
       <div key={blok._uid}>
         <StoryblokComponent blok={blok} />
       </div>

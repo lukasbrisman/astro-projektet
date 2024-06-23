@@ -4,11 +4,8 @@ import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
 interface SbBlokData {
   _uid: string
-  [key: string]: any
-}
-
-interface PageProps {
   body?: SbBlokData[]
+  [key: string]: any
 }
 
 const { blok }: { blok: SbBlokData } = Astro.props
@@ -16,7 +13,7 @@ const { blok }: { blok: SbBlokData } = Astro.props
 
 <main {...storyblokEditable(blok)}>
   {
-    blok.body?.map((blok) => (
+    blok.body?.map((blok: SbBlokData) => (
       <StoryblokComponent key={blok._uid} blok={blok} />
     ))
   }
