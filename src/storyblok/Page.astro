@@ -1,15 +1,20 @@
-k---
-import type { StoryblokComponent } from 'storyblok-js-client';
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
-interface PageProps {
-  body?: StoryblokComponent[];
+interface Blok {
+  _uid: string
+  body?: Blok[]
 }
 
-const { blok }: { blok: PageProps } = Astro.props;
+const { blok }: { blok: Blok } = Astro.props
 ---
-{blok.body?.map((component) => (
-  <div key={component._uid}>
-    <storyblok-blok component={component} />
-  </div>
-))}
+
+<main {...storyblokEditable(blok)}>
+  {
+    blok.body?.map((blok) => (
+      <StoryblokComponent key={blok._uid} blok={blok} />
+    ))
+  }
+</main>
 

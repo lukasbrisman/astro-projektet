@@ -1,15 +1,22 @@
 ---
-import type { StoryblokComponent } from 'storyblok-js-client';
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
-interface GridProps {
-  columns?: StoryblokComponent[];
+interface Blok {
+  _uid: string
+  columns?: Blok[]
 }
 
-const { blok }: { blok: GridProps } = Astro.props;
+const { blok }: { blok: Blok } = Astro.props
 ---
-{blok.columns?.map((column) => (
-  <div key={column._uid}>
-    <storyblok-blok component={column} />
-  </div>
-))}
+
+<div {...storyblokEditable(blok)}>
+  {
+    blok.columns?.map((blok) => (
+      <div key={blok._uid}>
+        <StoryblokComponent blok={blok} />
+      </div>
+    ))
+  }
+</div>
 
