@@ -2,12 +2,16 @@
 import { storyblokEditable } from '@storyblok/astro'
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 
-interface Blok {
+interface SbBlokData {
   _uid: string
-  columns?: Blok[]
+  [key: string]: any
 }
 
-const { blok }: { blok: Blok } = Astro.props
+interface GridProps {
+  columns?: SbBlokData[]
+}
+
+const { blok }: { blok: SbBlokData } = Astro.props
 ---
 
 <div {...storyblokEditable(blok)}>
